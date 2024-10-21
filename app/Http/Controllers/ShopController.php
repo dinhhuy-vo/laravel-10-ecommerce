@@ -20,7 +20,14 @@ class ShopController extends Controller
     public function index()
     {
         $products = $this->product->orderBy('id', 'DESC')->paginate(12);
-        return view('users.shop', compact('products'));
+        return view('shop', compact('products'));
+    }
+
+    public function productDetails($slug)
+    {
+        $product = $this->product->where('slug', $slug)->first();
+        $rproducts = $this->product->where('slug', '!=', $slug)->inRandomOrder('id')->get()->take(8);
+        return view('details', compact('product', 'rproducts'));
     }
 
     /**
