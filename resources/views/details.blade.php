@@ -99,13 +99,13 @@
                                     <div class="product-count">
                                         <ul>
                                             <li>
-                                                <img src="../assets/images/gif/fire.gif" class="img-fluid blur-up lazyload"
-                                                    alt="image">
+                                                <img src="{{ asset('assets/images/gif/fire.gif') }}"
+                                                    class="img-fluid blur-up lazyload" alt="image">
                                                 <span class="p-counter">37</span>
                                                 <span class="lang">orders in last 24 hours</span>
                                             </li>
                                             <li>
-                                                <img src="../assets/images/gif/person.gif"
+                                                <img src="{{ asset('assets/images/gif/person.gif') }}"
                                                     class="img-fluid user_img blur-up lazyload" alt="image">
                                                 <span class="p-counter">44</span>
                                                 <span class="lang">active view this</span>
@@ -139,19 +139,19 @@
                                             <ul class="image-section">
                                                 <li>
                                                     <a href="javascript:void(0)">
-                                                        <img src="../assets/images/fashion/product/front/5.jpg"
+                                                        <img src="{{ asset('assets/images/fashion/product/front/5.jpg') }}"
                                                             class="img-fluid blur-up lazyload" alt="">
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="javascript:void(0)">
-                                                        <img src="../assets/images/fashion/product/front/6.jpg"
+                                                        <img src="{{ asset('assets/images/fashion/product/front/6.jpg') }}"
                                                             class="img-fluid blur-up lazyload" alt="">
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="javascript:void(0)">
-                                                        <img src="../assets/images/fashion/product/front/7.jpg"
+                                                        <img src="{{ asset('assets/images/fashion/product/front/7.jpg') }}"
                                                             class="img-fluid blur-up lazyload" alt="">
                                                     </a>
                                                 </li>
@@ -211,18 +211,14 @@
                                             <i class="fa fa-bookmark fz-16 me-2"></i>
                                             <span>Wishlist</span>
                                         </a>
-                                        <a href="javascript:void(0)" id="cartEffect"
-                                            class="btn btn-solid hover-solid btn-animation">
+                                        <a href="javascript:void(0)"
+                                            onclick="event.preventDefault(); document.getElementById('addtocart').submit();"
+                                            {{-- id="cartEffect" --}} class="btn btn-solid hover-solid btn-animation">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>Add To Cart</span>
-                                            <form id="addtocart" method="post"
-                                                action="http://localhost:8000/cart/store">
-                                                <input type="hidden" name="_token"
-                                                    value="MkRqEzTGuoSx6LqJUm0OAKxSgNUYt26wTT7RMUZY"> <input
-                                                    type="hidden" name="id" value="1">
-                                                <input type="hidden" name="name"
-                                                    value="Autem Repudiandae Accusantium Blanditiis">
-                                                <input type="hidden" name="price" value="13">
+                                            <form id="addtocart" method="POST" action="{{ route('cart.store') }}">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $product->id }}">
                                                 <input type="hidden" name="quantity" id="qty" value="1">
                                             </form>
                                         </a>
@@ -233,8 +229,8 @@
 
                                     <ul class="product-count shipping-order">
                                         <li>
-                                            <img src="../assets/images/gif/truck.png" class="img-fluid blur-up lazyload"
-                                                alt="image">
+                                            <img src="{{ asset('assets/images/gif/truck.png') }}"
+                                                class="img-fluid blur-up lazyload" alt="image">
                                             <span class="lang">Free shipping for orders above $500 USD</span>
                                         </li>
                                     </ul>

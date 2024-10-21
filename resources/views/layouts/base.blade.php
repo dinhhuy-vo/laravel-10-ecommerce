@@ -136,10 +136,12 @@
                                                     </span>
                                                 </div>
                                             </li>
-                                            <li><a href="index.htm" class="nav-link menu-title">Home</a></li>
+                                            <li><a href="{{ route('app.index') }}" class="nav-link menu-title">Home</a>
+                                            </li>
                                             <li><a href="{{ route('shop.index') }}"
                                                     class="nav-link menu-title">Shop</a></li>
-                                            <li><a href="cart/list.html" class="nav-link menu-title">Cart</a></li>
+                                            <li><a href="{{ route('cart.index') }}"
+                                                    class="nav-link menu-title">Cart</a></li>
                                             <li><a href="about-us.html" class="nav-link menu-title">About Us</a></li>
                                             <li><a href="contact-us.html" class="nav-link menu-title">Contact Us</a>
                                             </li>
@@ -157,7 +159,7 @@
                                     </li>
                                     <li class="onhover-dropdown wislist-dropdown">
                                         <div class="cart-media">
-                                            <a href="wishlist/list.html">
+                                            <a href="wishlist">
                                                 <i data-feather="heart"></i>
                                                 <span id="wishlist-count" class="label label-theme rounded-pill">
                                                     0
@@ -167,10 +169,10 @@
                                     </li>
                                     <li class="onhover-dropdown wislist-dropdown">
                                         <div class="cart-media">
-                                            <a href="cart/list.html">
+                                            <a href="{{ route('cart.index') }}">
                                                 <i data-feather="shopping-cart"></i>
                                                 <span id="cart-count" class="label label-theme rounded-pill">
-                                                    0
+                                                    {{ Cart::instance('cart')->content()->count() }}
                                                 </span>
                                             </a>
                                         </div>

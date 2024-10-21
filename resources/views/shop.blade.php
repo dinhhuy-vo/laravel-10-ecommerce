@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @push('styles')
-    <link id="color-link" rel="stylesheet" type="text/css" href="assets/css/demo2.css">
+    <link id="color-link" rel="stylesheet" type="text/css" href="{{ asset('assets/css/demo2.css') }}">
     <style>
         nav svg {
             height: 20px;
@@ -461,7 +461,7 @@
                                             </a>
                                         </div>
                                         <div class="back">
-                                            <a href="{{ route('shop.product.details', ['slug' => $product->slug]) }}">
+                                            <a href="{{ route('shop.product.details', ['slug' => $product->slug]) }}/">
                                                 <img src="assets/images/fashion/product/back/{{ $product->image }}"
                                                     class="bg-img blur-up lazyload" alt="">
                                             </a>
@@ -508,8 +508,7 @@
                                             </ul>
                                         </div>
                                         <div class="main-price">
-                                            <a href="{{ route('shop.product.details', ['slug' => $product->slug]) }}"
-                                                class="font-default">
+                                            <a href="{{ asset('asset/') }}" class="font-default">
                                                 <h5 class="ms-0">{{ $product->name }}</h5>
                                             </a>
                                             <div class="listing-content">
