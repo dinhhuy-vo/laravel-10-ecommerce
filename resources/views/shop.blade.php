@@ -375,7 +375,8 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0)" class="wishlist">
+                                                    <a href="javascript:void(0)" class="wishlist"
+                                                        onclick="addProductToWishlist({{ $product->id }},'{{ $product->name }}', 1, {{ $product->regular_price }})">
                                                         <i data-feather="heart"></i>
                                                     </a>
                                                 </li>
@@ -476,18 +477,18 @@
                 $('#formFilter').submit();
             });
 
-            var range = $(".js-range-slider");
-            instance = $range.data("ionRangeSlider");
-            instance.update({
-                from: {{ $from }},
-                to: {{ $to }}
-            });
+            // var range = $(".js-range-slider");
+            // instance = $range.data("ionRangeSlider");
+            // instance.update({
+            //     from: {{ $from }},
+            //     to: {{ $to }}
+            // });
 
-            $("#prange").on("change", function() {
-                setTimeout(() => {
-                    $("#formFilter").submit();
-                }, 1000);
-            });
+            // $("#prange").on("change", function() {
+            //     setTimeout(() => {
+            //         $("#formFilter").submit();
+            //     }, 1000);
+            // });
         })
 
         function filterProductsByBrand(brand) {
@@ -514,6 +515,43 @@
             });
             $('#categories').val(categories);
             $('#formFilter').submit();
+        }
+
+        function addProductToWishlist(id, name, quantity, price) {
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('wishlist.store') }}',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    id: id,
+                    name: name,
+                    quantity: quantity,
+                    price: price
+                },
+                success: function(data) {
+                    if (data.status == 200) {
+                        getCartWishlistCount();
+                        $.notify({
+                            icon: "fa fa-check",
+                            title: "Success!",
+                            message: "Item successfully added to your wishlist!"
+                        });
+                    }
+                }
+            });
+        }
+
+        function getCartWishlistCount() {
+            $.ajax({
+                type: "GET",
+                url: "{{ route('shop.cart.wishlist.count') }}",
+                success: function(data) {
+                    if (data.status == 200) {
+                        $('#cart-count').html(data.cartCount);
+                        $('#wishlist-count').html(data.wishlistCount);
+                    }
+                }
+            });
         }
     </script>
 @endpush

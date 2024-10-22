@@ -159,10 +159,10 @@
                                     </li>
                                     <li class="onhover-dropdown wislist-dropdown">
                                         <div class="cart-media">
-                                            <a href="wishlist">
+                                            <a href="{{ route('wishlist.list') }}">
                                                 <i data-feather="heart"></i>
                                                 <span id="wishlist-count" class="label label-theme rounded-pill">
-                                                    0
+                                                    {{ Cart::instance('wishlist')->content()->count() }}
                                                 </span>
                                             </a>
                                         </div>

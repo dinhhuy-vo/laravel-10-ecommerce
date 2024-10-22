@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -93,6 +94,13 @@ class ShopController extends Controller
         $product = $this->product->where('slug', $slug)->first();
         $rproducts = $this->product->where('slug', '!=', $slug)->inRandomOrder('id')->get()->take(8);
         return view('details', compact('product', 'rproducts'));
+    }
+
+    public function getCartAndWishlistCount()
+    {
+        $cartCount = Cart::instance('cart')->content()->count();
+        $wishlistCount = Cart::instance('wishlist')->content()->count();
+        return response()->json(['status' => 200, 'cartCount' => $cartCount, 'wishlistCount' => $wishlistCount]);
     }
 
     /**
