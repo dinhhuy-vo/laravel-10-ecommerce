@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishListController;
@@ -37,6 +38,7 @@ Route::delete('/wishlist/remove', [WishListController::class, 'removeProductFrom
 Route::delete('/wishlist/clear', [WishListController::class, 'clearWishlist'])->name('wishlist.clear');
 Route::post('/wishlist/move-to-cart', [WishListController::class, 'moveToCart'])->name('wishlist.move.to.cart');
 
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 Auth::routes();
 
